@@ -44,7 +44,7 @@ client.on('messageCreate', (message)=>{
         const command = args.shift().toLowerCase();//comando
         switch (command){
             case "add"://adicionar player
-                if (players.length>0){
+                if (players.length>0 && args[0]!=null){
                     players.forEach(element => {
                         if(element.name==args[0]){
                             message.channel.send(`${args} já está no game`);
@@ -61,7 +61,7 @@ client.on('messageCreate', (message)=>{
                     }    
                 }
             
-                else{
+                if(players.length<=0 && args[0]!=null){
                     var player = new Player(args,0);
                     players.push(player);
                     if(message.author.id=="535970224646651908" && I==false){
@@ -80,9 +80,8 @@ client.on('messageCreate', (message)=>{
                     if(element.name==args[0]){
                         element.score++;
                         if((element.score%5)==0){
-                            message.channel.send(`Calma ${element}, tá brabo(a) demais, vencendo todas.`)
-                        }
-                        
+                            message.channel.send(`Calma ${element.name}, tá brabo(a) demais, vencendo todas.`)
+                        }   
                     }
                     
                 });
